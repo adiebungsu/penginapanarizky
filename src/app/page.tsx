@@ -381,7 +381,7 @@ export default function Home() {
                   <p className="text-gray-600 mb-4">{category.description}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-blue-600">{category.price}</span>
-                    <Link href={`/${category.id}`} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-300">
+                    <Link href="/detailroom" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-300">
                       Lihat Detail
                     </Link>
                   </div>
