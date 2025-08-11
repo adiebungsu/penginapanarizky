@@ -309,9 +309,9 @@ export default function Galeri() {
               Kunjungi Penginapan Arizky secara langsung untuk merasakan pengalaman yang tak terlupakan
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <a href="/booking" className="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-colors duration-200">
-                Pesan Sekarang
-              </a>
+                          <a href="/detailroom" className="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-colors duration-200">
+              Pesan Sekarang
+            </a>
               <a href="/kontak" className="border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold py-4 px-8 rounded-lg transition-colors duration-200">
                 Hubungi Kami
               </a>

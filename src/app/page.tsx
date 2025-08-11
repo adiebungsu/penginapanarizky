@@ -21,7 +21,7 @@ const heroSlides: HeroSlide[] = [
     subtitle: 'Temukan kenyamanan dan keindahan alam dalam satu tempat',
     cta: 'Pesan Sekarang',
     image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&h=1080&fit=crop&crop=center',
-    fallbackImage: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&h=1080&fit=crop&crop=center&blur=10'
+    fallbackImage: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1920&h=1080&fit=crop&crop=center' // fallback: pemandangan alam
   },
   {
     id: 2,
@@ -29,7 +29,7 @@ const heroSlides: HeroSlide[] = [
     subtitle: 'Nikmati liburan mewah dengan fasilitas lengkap',
     cta: 'Lihat Villa',
     image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1920&h=1080&fit=crop&crop=center',
-    fallbackImage: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1920&h=1080&fit=crop&crop=center&blur=10'
+    fallbackImage: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?w=1920&h=1080&fit=crop&crop=center' // fallback: villa
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ const heroSlides: HeroSlide[] = [
     subtitle: 'Beristirahat dengan tenang di kamar yang bersih dan nyaman',
     cta: 'Lihat Kamar',
     image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1920&h=1080&fit=crop&crop=center',
-    fallbackImage: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1920&h=1080&fit=crop&crop=center&blur=10'
+    fallbackImage: 'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=1920&h=1080&fit=crop&crop=center' // fallback: kamar hotel
   },
   {
     id: 4,
@@ -45,7 +45,7 @@ const heroSlides: HeroSlide[] = [
     subtitle: 'Nikmati hidangan lezat dengan pemandangan alam yang memukau',
     cta: 'Lihat Menu',
     image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&h=1080&fit=crop&crop=center',
-    fallbackImage: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&h=1080&fit=crop&crop=center&blur=10'
+    fallbackImage: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1920&h=1080&fit=crop&crop=center' // fallback: restoran
   },
   {
     id: 5,
@@ -53,7 +53,7 @@ const heroSlides: HeroSlide[] = [
     subtitle: 'Rasakan keramahan dan pelayanan terbaik kami',
     cta: 'Lihat Fasilitas',
     image: 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1920&h=1080&fit=crop&crop=center',
-    fallbackImage: 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1920&h=1080&fit=crop&crop=center&blur=10'
+    fallbackImage: 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=1920&h=1080&fit=crop&crop=center' // fallback: lobby hotel
   }
 ]
 
@@ -234,7 +234,7 @@ export default function Home() {
               )}
               
               <div 
-                className="w-full h-full bg-cover bg-center bg-no-repeat flex items-center justify-center min-h-screen"
+                className="w-full h-full bg-cover bg-center bg-no-repeat flex items-start md:items-center justify-center min-h-screen"
                 style={{ 
                   backgroundImage: `url(${getImageUrl(slide)})`,
                   backgroundSize: 'cover',
@@ -248,16 +248,17 @@ export default function Home() {
                   handleImageError(slide.id)
                 }}
               >
-                <div className="absolute inset-0 bg-black/15 backdrop-blur-sm"></div>
-                <div className="text-center text-white z-20 relative">
-                  <div className="bg-black/25 backdrop-blur-[1px] rounded-2xl p-8 mx-4 shadow-2xl">
-                    <h1 className="text-5xl md:text-7xl font-bold mb-6">
+                {/* Ubah overlay di dalam slider */}
+                <div className="absolute inset-0 bg-black/15"></div>
+                <div className="text-center text-white z-20 relative w-full flex items-center justify-center min-h-screen px-4">
+                  <div className="bg-black/25 backdrop-blur-[1px] rounded-2xl p-4 md:p-8 mx-auto shadow-2xl max-w-xl w-full">
+                    <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-2 leading-tight">
                       {slide.title}
                     </h1>
-                    <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+                    <p className="text-sm sm:text-lg md:text-xl mb-4 max-w-3xl mx-auto leading-relaxed">
                       {slide.subtitle}
                     </p>
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-300">
+                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-lg text-base md:text-lg font-semibold transition-colors duration-300 w-full sm:w-auto">
                       {slide.cta}
                     </button>
                   </div>
@@ -303,6 +304,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
+              <img src="/images/arizky 1.png" alt="Logo Arizky" className="w-40 h-40 mx-auto mb-6 object-contain" />
               <h2 className="text-4xl font-bold text-gray-900 mb-6">
                 Tentang Penginapan Arizky
               </h2>
@@ -462,7 +464,7 @@ export default function Home() {
               Pesan akomodasi Anda sekarang dan nikmati pengalaman liburan yang tak terlupakan di Penginapan Arizky
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <Link href="/booking" className="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-colors duration-200">
+              <Link href="/detailroom" className="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-colors duration-200">
                 Pesan Sekarang
               </Link>
               <Link href="/villa-kamar" className="border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold py-4 px-8 rounded-lg transition-colors duration-200">

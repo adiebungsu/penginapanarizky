@@ -269,9 +269,9 @@ export default function Fasilitas() {
               Pesan akomodasi Anda sekarang dan nikmati semua fasilitas premium yang kami sediakan
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <a href="/booking" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200">
-                Pesan Sekarang
-              </a>
+                          <a href="/detailroom" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200">
+              Pesan Sekarang
+            </a>
               <a href="/kontak" className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200">
                 Hubungi Kami
               </a>

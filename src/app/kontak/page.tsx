@@ -49,7 +49,7 @@ export default function Kontak() {
     {
       icon: Phone,
       title: 'Telepon',
-      value: '+62 812-3456-7890',
+      value: '083877080088',
       description: 'Layanan pelanggan 24/7'
     },
     {
@@ -75,7 +75,7 @@ export default function Kontak() {
   const socialMedia = [
     {
       name: 'WhatsApp',
-      value: '+62 812-3456-7890',
+      value: '083877080088',
       description: 'Chat langsung dengan kami'
     },
     {
@@ -213,7 +213,7 @@ export default function Kontak() {
                         value={formData.phone}
                         onChange={handleInputChange}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
-                        placeholder="+62 812-3456-7890"
+                        placeholder="083877080088"
                       />
                     </div>
                     
@@ -377,10 +377,10 @@ export default function Kontak() {
               Hubungi kami sekarang untuk informasi lebih lanjut atau langsung pesan akomodasi Anda
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <a href="/booking" className="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-colors duration-200">
-                Pesan Sekarang
-              </a>
-              <a href="tel:+6281234567890" className="border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold py-4 px-8 rounded-lg transition-colors duration-200">
+                          <a href="/detailroom" className="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-colors duration-200">
+              Pesan Sekarang
+            </a>
+              <a href="tel:083877080088" className="border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold py-4 px-8 rounded-lg transition-colors duration-200">
                 Telepon Langsung
               </a>
             </div>

@@ -1,15 +1,32 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { Menu, X, Phone, MapPin, Mail } from 'lucide-react'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [showInfoBar, setShowInfoBar] = useState(true)
+  const lastScrollY = useRef(0)
 
   useEffect(() => {
     setMounted(true)
+    const handleScroll = () => {
+      if (window.scrollY < 10) {
+        setShowInfoBar(true)
+        lastScrollY.current = window.scrollY
+        return
+      }
+      if (window.scrollY < lastScrollY.current) {
+        setShowInfoBar(true)
+      } else if (window.scrollY > lastScrollY.current) {
+        setShowInfoBar(false)
+      }
+      lastScrollY.current = window.scrollY
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const navigation = [
@@ -24,20 +41,20 @@ export default function Header() {
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
       {/* Top Bar */}
-      <div className="bg-blue-900 text-white py-2">
+      <div className={`${showInfoBar ? '' : 'hidden'} bg-blue-900 text-white py-2 transition-all duration-300`}>
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between text-sm">
             <div className="flex items-center space-x-6">
               <div className="flex items-center space-x-2">
                 <Phone className="w-4 h-4" />
-                <span>+62 812-3456-7890</span>
+                <span>083877080088</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="w-4 h-4" />
                 <span>info@penginapanarizky.com</span>
               </div>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="hidden md:flex items-center space-x-2">
               <MapPin className="w-4 h-4" />
               <span>Jl. Raya Wisata No. 123, Malang</span>
             </div>
@@ -50,9 +67,7 @@ export default function Header() {
         <div className="flex items-center justify-between py-4">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">A</span>
-            </div>
+            <img src="/images/arizky 1.png" alt="Logo Arizky" className="w-12 h-12 rounded-lg object-cover" />
             <div>
               <h1 className="text-2xl font-bold text-gray-900">Penginapan Arizky</h1>
               <p className="text-sm text-gray-600">Tempat Liburan Terbaik</p>
