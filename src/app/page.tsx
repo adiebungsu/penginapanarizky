@@ -447,8 +447,166 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Articles Section */}
       <section className="py-20 px-4 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Artikel & Tips Liburan
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Temukan informasi menarik dan tips liburan terbaru untuk pengalaman yang lebih baik
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Article 1 */}
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
+              <div className="relative h-48 overflow-hidden">
+                <div 
+                  className="w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-300 group-hover:scale-110"
+                  style={{ backgroundImage: `url(https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop)` }}
+                ></div>
+                <div className="absolute top-4 left-4">
+                  <span className="px-3 py-1 bg-blue-600 text-white text-sm font-medium rounded-full">
+                    Destinasi Wisata
+                  </span>
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="flex items-center space-x-4 text-sm text-gray-500 mb-3">
+                  <div className="flex items-center space-x-1">
+                    <span>Tim Arizky</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <span>25 Jan 2024</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <span>10 menit</span>
+                  </div>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300">
+                  Pantai Legon Pari Sawarna: Surga Tersembunyi di Selatan Banten
+                </h3>
+                <p className="text-gray-600 mb-4 line-clamp-3">
+                  Temukan keindahan Pantai Legon Pari Sawarna yang masih asri dengan pasir putih, ombak yang cocok untuk surfing, dan pemandangan sunset yang memukau.
+                </p>
+                <Link 
+                  href="/artikel/pantai-legon-pari-sawarna"
+                  className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300 group"
+                >
+                  <span>Baca Selengkapnya</span>
+                  <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+
+            {/* Article 2 */}
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
+              <div className="relative h-48 overflow-hidden">
+                <div 
+                  className="w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-300 group-hover:scale-110"
+                  style={{ backgroundImage: `url(https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&h=600&fit=crop)` }}
+                ></div>
+                <div className="absolute top-4 left-4">
+                  <span className="px-3 py-1 bg-green-600 text-white text-sm font-medium rounded-full">
+                    Travel Guide
+                  </span>
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="flex items-center space-x-4 text-sm text-gray-500 mb-3">
+                  <div className="flex items-center space-x-1">
+                    <span>Tim Arizky</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <span>26 Jan 2024</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <span>12 menit</span>
+                  </div>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300">
+                  Panduan Lengkap Liburan ke Pantai Legon Pari Sawarna
+                </h3>
+                <p className="text-gray-600 mb-4 line-clamp-3">
+                  Panduan lengkap untuk liburan yang tak terlupakan di Pantai Legon Pari Sawarna, dari persiapan hingga tips aktivitas.
+                </p>
+                <Link 
+                  href="/artikel/panduan-liburan-legon-pari"
+                  className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300 group"
+                >
+                  <span>Baca Selengkapnya</span>
+                  <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+
+            {/* Article 3 */}
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
+              <div className="relative h-48 overflow-hidden">
+                <div 
+                  className="w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-300 group-hover:scale-110"
+                  style={{ backgroundImage: `url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop)` }}
+                ></div>
+                <div className="absolute top-4 left-4">
+                  <span className="px-3 py-1 bg-purple-600 text-white text-sm font-medium rounded-full">
+                    Destinasi Wisata
+                  </span>
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="flex items-center space-x-4 text-sm text-gray-500 mb-3">
+                  <div className="flex items-center space-x-1">
+                    <span>Tim Arizky</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <span>27 Jan 2024</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <span>9 menit</span>
+                  </div>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300">
+                  Daya Tarik dan Pesona Alam Pantai Legon Pari Sawarna
+                </h3>
+                <p className="text-gray-600 mb-4 line-clamp-3">
+                  Temukan keindahan dan pesona alam yang memukau di Pantai Legon Pari Sawarna dengan ekosistem yang kaya.
+                </p>
+                <Link 
+                  href="/artikel/daya-tarik-legon-pari"
+                  className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300 group"
+                >
+                  <span>Baca Selengkapnya</span>
+                  <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* View All Articles Button */}
+          <div className="text-center mt-12">
+            <Link 
+              href="/artikel"
+              className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-300 group"
+            >
+              <span>Lihat Semua Artikel</span>
+              <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
