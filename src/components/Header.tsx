@@ -34,7 +34,7 @@ export default function Header() {
     { name: 'Villa & Kamar', href: '/villa-kamar' },
     { name: 'Fasilitas', href: '/fasilitas' },
     { name: 'Galeri', href: '/galeri' },
-    { name: 'Booking', href: '/booking' },
+    { name: 'Artikel', href: '/artikel' },
     { name: 'Kontak', href: '/kontak' }
   ]
 
@@ -90,7 +90,7 @@ export default function Header() {
           {/* CTA Button */}
           <div className="hidden lg:flex items-center space-x-4">
             <Link
-              href="/booking"
+              href="/villa-kamar"
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-300"
             >
               Pesan Sekarang
@@ -122,7 +122,7 @@ export default function Header() {
                 </Link>
               ))}
               <Link
-                href="/booking"
+                href="/villa-kamar"
                 className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-300 text-center"
                 onClick={() => setIsMenuOpen(false)}
               >

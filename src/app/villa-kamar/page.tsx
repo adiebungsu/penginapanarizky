@@ -257,13 +257,13 @@ export default function VillaKamar() {
                   {/* CTA Button */}
                   <div className="flex space-x-3">
                     <Link
-                      href="/detailroom"
+                      href={`/${accommodation.category}/${accommodation.category === 'villa' ? 'villa-premium' : accommodation.category === 'kamar' ? 'kamar-deluxe' : 'cottage-alam'}`}
                       className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-center py-3 px-4 rounded-lg font-medium transition-colors duration-300"
                     >
                       Pesan Sekarang
                     </Link>
                     <Link
-                      href="/detailroom"
+                      href={`/${accommodation.category}/${accommodation.category === 'villa' ? 'villa-premium' : accommodation.category === 'kamar' ? 'kamar-deluxe' : 'cottage-alam'}`}
                       className="px-4 py-3 border border-blue-600 text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-colors duration-300"
                     >
                       Detail

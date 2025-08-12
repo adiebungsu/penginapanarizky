@@ -9,6 +9,7 @@ interface HeroSlide {
   title: string
   subtitle: string
   cta: string
+  link: string
   image: string
   fallbackImage: string
 }
@@ -20,6 +21,7 @@ const heroSlides: HeroSlide[] = [
     title: 'Selamat Datang di Penginapan Arizky',
     subtitle: 'Temukan kenyamanan dan keindahan alam dalam satu tempat',
     cta: 'Pesan Sekarang',
+    link: '/villa-kamar',
     image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&h=1080&fit=crop&crop=center',
     fallbackImage: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1920&h=1080&fit=crop&crop=center' // fallback: pemandangan alam
   },
@@ -28,6 +30,7 @@ const heroSlides: HeroSlide[] = [
     title: 'Villa Premium dengan Pemandangan Indah',
     subtitle: 'Nikmati liburan mewah dengan fasilitas lengkap',
     cta: 'Lihat Villa',
+    link: '/villa/villa-premium',
     image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1920&h=1080&fit=crop&crop=center',
     fallbackImage: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?w=1920&h=1080&fit=crop&crop=center' // fallback: villa
   },
@@ -36,6 +39,7 @@ const heroSlides: HeroSlide[] = [
     title: 'Kamar Nyaman untuk Keluarga',
     subtitle: 'Beristirahat dengan tenang di kamar yang bersih dan nyaman',
     cta: 'Lihat Kamar',
+    link: '/kamar/kamar-deluxe',
     image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1920&h=1080&fit=crop&crop=center',
     fallbackImage: 'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=1920&h=1080&fit=crop&crop=center' // fallback: kamar hotel
   },
@@ -44,6 +48,7 @@ const heroSlides: HeroSlide[] = [
     title: 'Restoran dengan Cita Rasa Terbaik',
     subtitle: 'Nikmati hidangan lezat dengan pemandangan alam yang memukau',
     cta: 'Lihat Menu',
+    link: '/fasilitas',
     image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&h=1080&fit=crop&crop=center',
     fallbackImage: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1920&h=1080&fit=crop&crop=center' // fallback: restoran
   },
@@ -52,6 +57,7 @@ const heroSlides: HeroSlide[] = [
     title: 'Lobby yang Elegan dan Nyaman',
     subtitle: 'Rasakan keramahan dan pelayanan terbaik kami',
     cta: 'Lihat Fasilitas',
+    link: '/fasilitas',
     image: 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1920&h=1080&fit=crop&crop=center',
     fallbackImage: 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=1920&h=1080&fit=crop&crop=center' // fallback: lobby hotel
   }
@@ -62,6 +68,11 @@ export default function Home() {
   const [imageErrors, setImageErrors] = useState<{[key: number]: boolean}>({})
   const [imageLoading, setImageLoading] = useState<{[key: number]: boolean}>({})
   const [mounted, setMounted] = useState(false)
+
+  // Debug: Log current slide changes
+  useEffect(() => {
+    console.log(`Current slide changed to: ${currentSlide}`)
+  }, [currentSlide])
 
   useEffect(() => {
     setMounted(true)
@@ -158,11 +169,20 @@ export default function Home() {
   ]
 
   useEffect(() => {
+    console.log('Setting up auto-slide timer...')
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
+      console.log('Auto-sliding to next slide...')
+      setCurrentSlide((prev) => {
+        const next = (prev + 1) % heroSlides.length
+        console.log(`Slide changed from ${prev} to ${next}`)
+        return next
+      })
     }, 5000)
-    return () => clearInterval(timer)
-  }, [heroSlides.length])
+    return () => {
+      console.log('Clearing auto-slide timer...')
+      clearInterval(timer)
+    }
+  }, [])
 
   // Preload images to prevent loading issues
   useEffect(() => {
@@ -201,15 +221,16 @@ export default function Home() {
     return slide.image
   }
 
-  if (!mounted) {
-    return (
-      <main>
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
-        </div>
-      </main>
-    )
-  }
+  // Hapus loading state yang bermasalah
+  // if (!mounted) {
+  //   return (
+  //     <main>
+  //       <div className="flex items-center justify-center min-h-screen">
+  //         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+  //       </div>
+  //     </main>
+  //   )
+  // }
 
   return (
     <main>
@@ -228,8 +249,11 @@ export default function Home() {
             >
               {/* Loading State */}
               {imageLoading[slide.id] && (
-                <div className="absolute inset-0 bg-gray-900 flex items-center justify-center z-30">
-                  <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center z-30">
+                  <div className="text-center">
+                    <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white mx-auto mb-4"></div>
+                    <p className="text-white text-sm">Memuat gambar...</p>
+                  </div>
                 </div>
               )}
               
@@ -258,9 +282,14 @@ export default function Home() {
                     <p className="text-sm sm:text-lg md:text-xl mb-4 max-w-3xl mx-auto leading-relaxed">
                       {slide.subtitle}
                     </p>
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-lg text-base md:text-lg font-semibold transition-colors duration-300 w-full sm:w-auto">
-                      {slide.cta}
-                    </button>
+                    <Link href={slide.link} className="group bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-semibold transition-all duration-300 w-full sm:w-auto shadow-lg hover:shadow-xl transform hover:-translate-y-1 inline-block">
+                      <span className="flex items-center justify-center space-x-2">
+                        <span>{slide.cta}</span>
+                        <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                      </span>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -381,9 +410,9 @@ export default function Home() {
                   <p className="text-gray-600 mb-4">{category.description}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-blue-600">{category.price}</span>
-                    <Link href="/detailroom" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-300">
-                      Lihat Detail
-                    </Link>
+                                         <Link href={`/${category.id === 'villa' ? 'villa/villa-premium' : category.id === 'kamar' ? 'kamar/kamar-deluxe' : 'cottage/cottage-alam'}`} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-300">
+                       Lihat Detail
+                     </Link>
                   </div>
                 </div>
               </div>
@@ -464,7 +493,7 @@ export default function Home() {
               Pesan akomodasi Anda sekarang dan nikmati pengalaman liburan yang tak terlupakan di Penginapan Arizky
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <Link href="/detailroom" className="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-colors duration-200">
+              <Link href="/villa-kamar" className="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-colors duration-200">
                 Pesan Sekarang
               </Link>
               <Link href="/villa-kamar" className="border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold py-4 px-8 rounded-lg transition-colors duration-200">
