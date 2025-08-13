@@ -3,6 +3,48 @@
 import { useState } from 'react'
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send, CheckCircle } from 'lucide-react'
 
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Bagaimana cara melakukan pemesanan?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text:
+          'Anda dapat melakukan pemesanan melalui website kami, WhatsApp, atau telepon langsung. Pembayaran dapat dilakukan melalui transfer bank atau pembayaran di tempat.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Apakah ada fasilitas untuk anak-anak?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text:
+          'Ya, kami menyediakan berbagai fasilitas ramah anak seperti taman bermain dan menu makanan khusus anak-anak.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Bisakah saya membawa hewan peliharaan?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Untuk saat ini kami belum menyediakan fasilitas untuk hewan peliharaan. Mohon maaf atas ketidaknyamanannya.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Apakah ada layanan antar jemput dari bandara?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text:
+          'Ya, kami menyediakan layanan antar jemput dari Bandara Soekarno-Hatta Jakarta dengan biaya tambahan. Silakan hubungi kami untuk informasi lebih lanjut.',
+      },
+    },
+  ],
+}
+
 export default function Kontak() {
   const [formData, setFormData] = useState({
     name: '',
@@ -61,8 +103,8 @@ export default function Kontak() {
     {
       icon: MapPin,
       title: 'Alamat',
-      value: 'Jl. Raya Wisata No. 123, Malang',
-      description: 'Jawa Timur, Indonesia'
+      value: 'Jl. Raya Sawarna - Bayah, Lebak, Banten',
+              description: 'Banten, Indonesia'
     },
     {
       icon: Clock,
@@ -92,6 +134,7 @@ export default function Kontak() {
 
   return (
     <main className="min-h-screen bg-gray-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       {/* Hero Section */}
       <section className="relative h-96 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="absolute inset-0 bg-black/30"></div>
@@ -280,7 +323,7 @@ export default function Kontak() {
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Lokasi Kami</h2>
               <p className="text-gray-600 mb-8">
-                Penginapan Arizky berlokasi strategis di Malang dengan akses mudah dan pemandangan alam yang memukau.
+                Penginapan Arizky berlokasi strategis di Sawarna, Bayah, Lebak, Banten dengan akses mudah dan pemandangan alam yang memukau.
               </p>
 
               {/* Map Placeholder */}
@@ -300,7 +343,7 @@ export default function Kontak() {
                     <MapPin className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="font-medium text-gray-900">Alamat Lengkap:</p>
-                      <p>Jl. Raya Wisata No. 123, Desa Wisata, Kecamatan Malang, Malang, Jawa Timur 65152</p>
+                      <p>Jl. Raya Sawarna, Desa Sawarna, Kecamatan Bayah, Lebak, Banten 42393</p>
                     </div>
                   </div>
                   
@@ -308,7 +351,7 @@ export default function Kontak() {
                     <Clock className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="font-medium text-gray-900">Jarak dari Pusat Kota:</p>
-                      <p>15 km dari Alun-alun Malang (30 menit)</p>
+                      <p>15 km dari Pantai Legon Pari (30 menit)</p>
                     </div>
                   </div>
                   
@@ -346,7 +389,7 @@ export default function Kontak() {
               },
               {
                 question: 'Apakah ada fasilitas untuk anak-anak?',
-                answer: 'Ya, kami menyediakan berbagai fasilitas ramah anak seperti kolam renang khusus anak, taman bermain, dan menu makanan khusus anak-anak.'
+                answer: 'Ya, kami menyediakan berbagai fasilitas ramah anak seperti taman bermain dan menu makanan khusus anak-anak.'
               },
               {
                 question: 'Bisakah saya membawa hewan peliharaan?',
@@ -354,7 +397,7 @@ export default function Kontak() {
               },
               {
                 question: 'Apakah ada layanan antar jemput dari bandara?',
-                answer: 'Ya, kami menyediakan layanan antar jemput dari Bandara Abdul Rachman Saleh Malang dengan biaya tambahan. Silakan hubungi kami untuk informasi lebih lanjut.'
+                answer: 'Ya, kami menyediakan layanan antar jemput dari Bandara Soekarno-Hatta Jakarta dengan biaya tambahan. Silakan hubungi kami untuk informasi lebih lanjut.'
               }
             ].map((faq, index) => (
               <div key={index} className="bg-white rounded-lg shadow-lg p-6">

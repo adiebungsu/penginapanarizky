@@ -4,6 +4,25 @@ import { useState } from 'react'
 import { Calendar, Clock, User, ArrowLeft, Heart, Bookmark, Share2, MapPin, Camera, Waves, Sun, Mountain, Star, Tree, Fish } from 'lucide-react'
 import Link from 'next/link'
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: 'Daya Tarik dan Pesona Alam Pantai Legon Pari Sawarna',
+  description: 'Ulasan keunikan, ekosistem, spot foto, dan aktivitas di Pantai Legon Pari Sawarna.',
+  image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&h=630&fit=crop',
+  author: { '@type': 'Organization', name: 'Penginapan Arizky' },
+  publisher: { '@type': 'Organization', name: 'Penginapan Arizky' },
+  datePublished: '2024-01-27',
+  dateModified: '2024-01-27',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': 'https://penginapanarizky.com/artikel/daya-tarik-legon-pari'
+  },
+  keywords: [
+    'penginapan pantai sawarna', 'villa sawarna', 'pantai legon pari', 'daya tarik sawarna',
+  ],
+}
+
 export default function DayaTarikLegonPariArticle() {
   const [isLiked, setIsLiked] = useState(false)
   const [isBookmarked, setIsBookmarked] = useState(false)
@@ -24,6 +43,7 @@ export default function DayaTarikLegonPariArticle() {
 
   return (
     <main className="min-h-screen bg-gray-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Hero Section */}
       <div className="relative h-96 md:h-[500px] overflow-hidden">
         <img

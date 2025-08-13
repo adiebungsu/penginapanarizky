@@ -4,6 +4,17 @@ import { useState } from 'react'
 import { Star, MapPin, Users, Wifi, Car, Coffee, Utensils, Waves, Mountain, Camera, Bed, Droplets, Tv, Airplay } from 'lucide-react'
 import Link from 'next/link'
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Daftar Villa & Kamar Penginapan Arizky - Legon Pari Sawarna',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, url: 'https://penginapanarizky.com/villa/villa-premium', name: 'Villa Premium' },
+    { '@type': 'ListItem', position: 2, url: 'https://penginapanarizky.com/kamar/kamar-deluxe', name: 'Kamar Deluxe' },
+    { '@type': 'ListItem', position: 3, url: 'https://penginapanarizky.com/cottage/cottage-alam', name: 'Cottage Alam' },
+  ],
+}
+
 export default function VillaKamar() {
   const [selectedCategory, setSelectedCategory] = useState('all')
 
@@ -19,12 +30,12 @@ export default function VillaKamar() {
       id: 1,
       category: 'villa',
       name: 'Villa Premium Deluxe',
-      description: 'Villa mewah dengan kolam renang pribadi, pemandangan gunung, dan fasilitas lengkap untuk keluarga besar.',
+      description: 'Villa mewah dengan pemandangan gunung dan fasilitas lengkap untuk keluarga besar.',
       price: 'Rp 2.500.000',
       pricePerNight: 'per malam',
       capacity: '6-8 orang',
       size: '150 m²',
-      amenities: ['Kolam Renang Pribadi', 'Teras Luas', 'Dapur Lengkap', 'WiFi', 'AC', 'TV LED', 'Kamar Mandi Dalam'],
+      amenities: ['Teras Luas', 'Dapur Lengkap', 'WiFi', 'AC', 'TV LED', 'Kamar Mandi Dalam'],
       images: [
         'https://i.imgur.com/XQKMbFZ.jpeg',
         'https://i.imgur.com/wBoC7ZA.jpeg',
@@ -133,6 +144,7 @@ export default function VillaKamar() {
 
   return (
     <main className="min-h-screen bg-gray-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Hero Section */}
       <section className="relative h-96 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="absolute inset-0 bg-black/30"></div>
@@ -275,6 +287,13 @@ export default function VillaKamar() {
           </div>
         </div>
       </section>
+
+      {/* SEO Keywords Helper (visually hidden) */}
+      <div className="sr-only">
+        penginapan arizky, penginapan arizky legon pari, penginapan pantai sawarna, villa sawarna, villa sawarna banten,
+        penginapan sawarna murah dekat pantai, villa keluarga di sawarna dekat legon pari, penginapan tepi pantai sawarna,
+        villa private pool di sawarna, booking penginapan sawarna legon pari
+      </div>
 
       {/* CTA Section */}
       <section className="py-20 px-4">

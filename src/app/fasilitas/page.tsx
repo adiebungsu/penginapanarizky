@@ -2,6 +2,27 @@
 
 import { Star, Users, Wifi, Car, Coffee, Utensils, Waves, Mountain, Camera, Droplets, Phone, Clock } from 'lucide-react'
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Fasilitas Penginapan Arizky',
+  provider: {
+    '@type': 'LodgingBusiness',
+    name: 'Penginapan Arizky',
+  },
+  areaServed: 'Legon Pari, Sawarna, Banten',
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Fasilitas Unggulan',
+    itemListElement: [
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'WiFi Gratis' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Area Bersantai' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Cafe & Lounge' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Area Camping' } },
+    ],
+  },
+}
+
 export default function Fasilitas() {
   const facilities = [
     {
@@ -14,36 +35,9 @@ export default function Fasilitas() {
       rating: 4.8,
       reviewCount: 89
     },
-    {
-      id: 2,
-      name: 'Parkir Luas',
-      description: 'Area parkir yang aman dan luas untuk kendaraan roda dua dan roda empat.',
-      icon: Car,
-      image: 'https://i.imgur.com/XQKMbFZ.jpeg',
-      features: ['Area Parkir 1000 m²', 'Security 24 Jam', 'Gratis untuk Tamu', 'Covered Parking'],
-      rating: 4.9,
-      reviewCount: 156
-    },
-    {
-      id: 3,
-      name: 'Restoran Premium',
-      description: 'Restoran dengan menu lokal dan internasional serta pemandangan alam yang memukau.',
-      icon: Utensils,
-      image: 'https://i.imgur.com/kJQHIep.jpeg',
-      features: ['Menu Lokal & Internasional', 'Chef Profesional', 'Pemandangan Alam', 'Room Service'],
-      rating: 4.8,
-      reviewCount: 234
-    },
-    {
-      id: 4,
-      name: 'Kolam Renang',
-      description: 'Kolam renang infinity dengan pemandangan alam yang menenangkan.',
-      icon: Waves,
-      image: 'https://i.imgur.com/wBoC7ZA.jpeg',
-      features: ['Infinity Pool', 'Pemandangan Gunung', 'Pool Towel', 'Pool Bar'],
-      rating: 4.9,
-      reviewCount: 178
-    },
+    // Parkir dihapus: lokasi tidak akses mobil
+    // Restoran dihapus: tidak tersedia
+    // Kolam renang dihapus: tidak tersedia
     {
       id: 5,
       name: 'Cafe & Lounge',
@@ -95,6 +89,7 @@ export default function Fasilitas() {
 
   return (
     <main className="min-h-screen bg-gray-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Hero Section */}
       <section className="relative h-96 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="absolute inset-0 bg-black/30"></div>

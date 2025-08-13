@@ -56,7 +56,7 @@ export default function Header() {
             </div>
             <div className="hidden md:flex items-center space-x-2">
               <MapPin className="w-4 h-4" />
-              <span>Jl. Raya Wisata No. 123, Malang</span>
+              <span>Jl. Raya Sawarna - Bayah, Lebak, Banten</span>
             </div>
           </div>
         </div>

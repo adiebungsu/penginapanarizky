@@ -4,6 +4,25 @@ import { useState } from 'react'
 import { Calendar, Clock, User, ArrowLeft, Heart, Bookmark, Share2, MapPin, Camera, Waves, Sun, Mountain, Car, Hotel, Utensils } from 'lucide-react'
 import Link from 'next/link'
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: 'Panduan Lengkap Liburan ke Pantai Legon Pari Sawarna',
+  description: 'Panduan lengkap liburan ke Legon Pari Sawarna: persiapan, rute, akomodasi, kuliner, aktivitas dan tips hemat.',
+  image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&h=630&fit=crop',
+  author: { '@type': 'Organization', name: 'Penginapan Arizky' },
+  publisher: { '@type': 'Organization', name: 'Penginapan Arizky' },
+  datePublished: '2024-01-26',
+  dateModified: '2024-01-26',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': 'https://penginapanarizky.com/artikel/panduan-liburan-legon-pari'
+  },
+  keywords: [
+    'penginapan arizky', 'villa sawarna', 'penginapan legon pari', 'travel guide sawarna', 'rute sawarna',
+  ],
+}
+
 export default function PanduanLiburanLegonPariArticle() {
   const [isLiked, setIsLiked] = useState(false)
   const [isBookmarked, setIsBookmarked] = useState(false)
@@ -24,6 +43,7 @@ export default function PanduanLiburanLegonPariArticle() {
 
   return (
     <main className="min-h-screen bg-gray-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Hero Section */}
       <div className="relative h-96 md:h-[500px] overflow-hidden">
         <img
@@ -157,8 +177,7 @@ export default function PanduanLiburanLegonPariArticle() {
               <div className="bg-blue-50 p-6 rounded-xl">
                 <h3 className="text-lg font-semibold text-blue-900 mb-3">🏖️ Resort Sawarna</h3>
                 <p className="text-blue-800">
-                  Resort mewah dengan fasilitas lengkap, kolam renang, dan pemandangan pantai yang langsung 
-                  terlihat dari kamar.
+                  Resort dengan fasilitas lengkap dan pemandangan pantai yang langsung terlihat dari kamar.
                 </p>
                 <p className="text-sm text-blue-700 mt-2">Harga: Rp 800.000 - 1.500.000/malam</p>
               </div>

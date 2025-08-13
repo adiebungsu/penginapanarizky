@@ -10,15 +10,83 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Penginapan Arizky - Tempat Liburan Terbaik di Malang",
-  description: "Penginapan Arizky adalah destinasi liburan premium yang menggabungkan kenyamanan modern dengan keindahan alam yang memukau. Villa mewah, kamar nyaman, dan fasilitas lengkap untuk liburan tak terlupakan.",
-  keywords: "penginapan, villa, malang, wisata, liburan, akomodasi, hotel, resort",
+  metadataBase: new URL("https://penginapanarizky.com"),
+  applicationName: "Penginapan Arizky",
+  title: {
+    default: "Penginapan Arizky - Villa & Penginapan Terbaik di Legon Pari Sawarna",
+    template: "%s | Penginapan Arizky"
+  },
+  description:
+    "Penginapan Arizky di Legon Pari Sawarna: pilihan villa sawarna dan penginapan tepi pantai untuk keluarga. Fasilitas lengkap, lokasi strategis, harga terbaik.",
+  keywords: [
+    // brand
+    "penginapan arizky",
+    "penginapan arizky legon pari",
+    "penginapan arizky sawarna",
+    // lokasi & kategori
+    "penginapan pantai sawarna",
+    "villa sawarna",
+    "villa di pantai sawarna",
+    "penginapan legon pari",
+    // short-tail
+    "penginapan sawarna",
+    "villa sawarna banten",
+    "akomodasi sawarna",
+    // long-tail
+    "penginapan sawarna murah dekat pantai",
+    "villa keluarga di sawarna dekat legon pari",
+    "penginapan tepi pantai sawarna cocok untuk keluarga",
+    "villa private pool di sawarna",
+    "booking penginapan sawarna legon pari",
+  ],
   authors: [{ name: "Penginapan Arizky" }],
+  creator: "Penginapan Arizky",
+  publisher: "Penginapan Arizky",
+  category: "travel",
+  alternates: {
+    canonical: "/",
+    languages: {
+      "id-ID": "/",
+    },
+  },
   openGraph: {
-    title: "Penginapan Arizky - Tempat Liburan Terbaik di Malang",
-    description: "Villa mewah dengan pemandangan alam indah, fasilitas lengkap untuk liburan keluarga yang nyaman dan mewah.",
+    title: "Penginapan Arizky - Villa & Penginapan Terbaik di Legon Pari Sawarna",
+    description:
+      "Villa mewah dan penginapan nyaman di Legon Pari Sawarna. Fasilitas lengkap, dekat pantai, cocok untuk keluarga dan rombongan.",
     type: "website",
     locale: "id_ID",
+    url: "https://penginapanarizky.com/",
+    siteName: "Penginapan Arizky",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=630&fit=crop&crop=center",
+        width: 1200,
+        height: 630,
+        alt: "Penginapan Arizky - Villa & Penginapan di Sawarna",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Penginapan Arizky - Villa & Penginapan di Legon Pari Sawarna",
+    description:
+      "Villa mewah dan penginapan nyaman di Legon Pari Sawarna. Fasilitas lengkap, dekat pantai, cocok untuk keluarga dan rombongan.",
+    images: [
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=630&fit=crop&crop=center",
+    ],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      maxVideoPreview: -1,
+      maxImagePreview: "large",
+      maxSnippet: -1,
+    },
   },
 };
 

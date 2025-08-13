@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, use } from 'react'
-import { Star, MapPin, Users, Wifi, Car, Coffee, Utensils, Waves, Mountain, Calendar, Clock, Phone, Pool, TreePine } from 'lucide-react'
+import { Star, MapPin, Users, Wifi, Car, Coffee, Utensils, Waves, Mountain, Calendar, Clock, Phone, TreePine } from 'lucide-react'
 import Link from 'next/link'
 
 interface VillaDetail {
@@ -24,17 +24,19 @@ const villaData: { [key: string]: VillaDetail } = {
   'villa-premium': {
     id: 'villa-premium',
     name: 'Villa Premium',
-    description: 'Villa mewah dengan kolam renang pribadi dan pemandangan alam yang memukau. Dilengkapi dengan fasilitas lengkap untuk liburan keluarga yang nyaman.',
+    description: 'Villa mewah dengan pemandangan alam yang memukau. Dilengkapi dengan fasilitas lengkap untuk liburan keluarga yang nyaman.',
     price: 2500000,
     capacity: 6,
     size: '150m²',
     bedrooms: 3,
     bathrooms: 2,
-    amenities: ['Kolam Renang Pribadi', 'AC di Semua Ruangan', 'TV LED 55"', 'WiFi Gratis', 'Dapur Lengkap', 'Balkon Luas', 'Parkir Mobil', 'Garden View'],
+    amenities: ['AC di Semua Ruangan', 'TV LED 55"', 'WiFi Gratis', 'Dapur Lengkap', 'Balkon Luas', 'Garden View'],
     images: [
-      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1464983953574-0892a716854b?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop'
+      'https://i.imgur.com/XQKMbFZ.jpeg',
+      'https://i.imgur.com/DabvprB.jpeg',
+      'https://i.imgur.com/TASDEI8.jpeg',
+      'https://i.imgur.com/zgtnDbS.jpeg',
+      'https://i.imgur.com/acr10CW.jpeg'
     ],
     rating: 4.9,
     reviews: 89
@@ -48,7 +50,7 @@ const villaData: { [key: string]: VillaDetail } = {
     size: '120m²',
     bedrooms: 4,
     bathrooms: 3,
-    amenities: ['Kolam Renang', 'AC di Semua Ruangan', 'TV LED 50"', 'WiFi Gratis', 'Dapur Modern', 'Teras Luas', 'Parkir 2 Mobil', 'Mountain View'],
+    amenities: ['AC di Semua Ruangan', 'TV LED 50"', 'WiFi Gratis', 'Dapur Modern', 'Teras Luas', 'Mountain View'],
     images: [
       'https://images.unsplash.com/photo-1464983953574-0892a716854b?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&h=600&fit=crop',
@@ -66,7 +68,7 @@ const villaData: { [key: string]: VillaDetail } = {
     size: '80m²',
     bedrooms: 2,
     bathrooms: 1,
-    amenities: ['AC di Semua Ruangan', 'TV LED 42"', 'WiFi Gratis', 'Dapur Sederhana', 'Teras', 'Parkir Mobil', 'Garden View'],
+    amenities: ['AC di Semua Ruangan', 'TV LED 42"', 'WiFi Gratis', 'Dapur Sederhana', 'Teras', 'Garden View'],
     images: [
       'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1464983953574-0892a716854b?w=800&h=600&fit=crop',
@@ -79,7 +81,7 @@ const villaData: { [key: string]: VillaDetail } = {
 
 export default function VillaDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const [currentImage, setCurrentImage] = useState(0)
-  const [activeTab, setActiveTab] = useState('gallery')
+  const [activeSection, setActiveSection] = useState('gallery')
   const [isScrolled, setIsScrolled] = useState(false)
 
   const resolvedParams = use(params)
@@ -93,6 +95,31 @@ export default function VillaDetailPage({ params }: { params: Promise<{ id: stri
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Scroll spy untuk highlight navigasi
+  useEffect(() => {
+    const sectionIds = ['gallery', 'information', 'amenities', 'reviews']
+    const observers: IntersectionObserver[] = []
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id)
+      if (!el) return
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveSection(id)
+          }
+        },
+        { rootMargin: '-40% 0px -50% 0px', threshold: 0.1 }
+      )
+      observer.observe(el)
+      observers.push(observer)
+    })
+    return () => observers.forEach((o) => o.disconnect())
+  }, [])
+
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   if (!villa) {
     return (
@@ -137,20 +164,22 @@ export default function VillaDetailPage({ params }: { params: Promise<{ id: stri
       }`}>
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex overflow-x-auto space-x-8 py-4">
-            {['gallery', 'information', 'amenities', 'reviews'].map((tab) => (
+            {[
+              { id: 'gallery', label: 'Galeri' },
+              { id: 'information', label: 'Informasi' },
+              { id: 'amenities', label: 'Fasilitas' },
+              { id: 'reviews', label: 'Ulasan' },
+            ].map((item) => (
               <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
                 className={`whitespace-nowrap px-4 py-2 rounded-lg font-medium transition-colors duration-300 ${
-                  activeTab === tab
+                  activeSection === item.id
                     ? 'bg-green-600 text-white'
                     : 'text-gray-600 hover:text-green-600 hover:bg-green-50'
                 }`}
               >
-                {tab === 'gallery' && 'Galeri'}
-                {tab === 'information' && 'Informasi'}
-                {tab === 'amenities' && 'Fasilitas'}
-                {tab === 'reviews' && 'Ulasan'}
+                {item.label}
               </button>
             ))}
           </div>
@@ -161,16 +190,15 @@ export default function VillaDetailPage({ params }: { params: Promise<{ id: stri
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Gallery Tab */}
-            {activeTab === 'gallery' && (
-              <div className="bg-white rounded-2xl shadow-lg p-6">
+            {/* Galeri */}
+            <div id="gallery" className="bg-white rounded-2xl shadow-lg p-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Galeri Villa</h2>
                 <div className="space-y-4">
-                  <div className="relative h-96 rounded-xl overflow-hidden">
+                  <div className="relative rounded-xl overflow-hidden bg-black">
                     <img
                       src={villa.images[currentImage]}
                       alt={`${villa.name} - Image ${currentImage + 1}`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-auto max-h-[85svh] object-contain mx-auto"
                     />
                   </div>
                   <div className="flex space-x-2 overflow-x-auto">
@@ -192,11 +220,9 @@ export default function VillaDetailPage({ params }: { params: Promise<{ id: stri
                   </div>
                 </div>
               </div>
-            )}
 
-            {/* Information Tab */}
-            {activeTab === 'information' && (
-              <div className="bg-white rounded-2xl shadow-lg p-6">
+            {/* Informasi */}
+            <div id="information" className="bg-white rounded-2xl shadow-lg p-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Informasi Villa</h2>
                 <div className="space-y-6">
                   <div>
@@ -223,11 +249,9 @@ export default function VillaDetailPage({ params }: { params: Promise<{ id: stri
                   </div>
                 </div>
               </div>
-            )}
 
-            {/* Amenities Tab */}
-            {activeTab === 'amenities' && (
-              <div className="bg-white rounded-2xl shadow-lg p-6">
+            {/* Fasilitas */}
+            <div id="amenities" className="bg-white rounded-2xl shadow-lg p-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Fasilitas Villa</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {villa.amenities.map((amenity, index) => (
@@ -238,11 +262,9 @@ export default function VillaDetailPage({ params }: { params: Promise<{ id: stri
                   ))}
                 </div>
               </div>
-            )}
 
-            {/* Reviews Tab */}
-            {activeTab === 'reviews' && (
-              <div className="bg-white rounded-2xl shadow-lg p-6">
+            {/* Ulasan */}
+            <div id="reviews" className="bg-white rounded-2xl shadow-lg p-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Ulasan Tamu</h2>
                 <div className="flex items-center space-x-4 mb-6">
                   <div className="flex text-yellow-400">
@@ -258,7 +280,6 @@ export default function VillaDetailPage({ params }: { params: Promise<{ id: stri
                 </div>
                 <p className="text-gray-600">Belum ada ulasan untuk villa ini. Jadilah yang pertama memberikan ulasan!</p>
               </div>
-            )}
           </div>
 
           {/* Sidebar - Booking Form */}

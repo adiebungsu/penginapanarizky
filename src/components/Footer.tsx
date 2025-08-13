@@ -10,17 +10,15 @@ export default function Footer() {
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">A</span>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold">Penginapan Arizky</h3>
-                <p className="text-gray-400 text-sm">Tempat Liburan Terbaik</p>
-              </div>
-            </div>
+                     {/* Company Info */}
+           <div className="lg:col-span-2">
+             <div className="flex items-center space-x-2 mb-4">
+               <img src="/images/arizky 1.png" alt="Logo Arizky" className="w-12 h-12 rounded-lg object-cover" />
+               <div>
+                 <h3 className="text-xl font-bold">Penginapan Arizky</h3>
+                 <p className="text-gray-400 text-sm">Tempat Liburan Terbaik</p>
+               </div>
+             </div>
             <p className="text-gray-300 mb-6 max-w-md">
               Penginapan Arizky adalah destinasi liburan premium yang menggabungkan kenyamanan modern 
               dengan keindahan alam yang memukau. Nikmati pengalaman liburan yang tak terlupakan.
@@ -88,8 +86,8 @@ export default function Footer() {
               <div className="flex items-start space-x-3">
                 <MapPin className="w-4 h-4 text-blue-400 mt-1" />
                 <span className="text-gray-300">
-                  Jl. Raya Wisata No. 123<br />
-                  Malang, Jawa Timur 65151
+                  Jl. Raya Sawarna<br />
+                  Sawarna, Bayah, Lebak, Banten 42393
                 </span>
               </div>
             </div>

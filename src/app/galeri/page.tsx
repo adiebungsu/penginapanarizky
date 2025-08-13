@@ -14,6 +14,13 @@ interface GalleryImage {
   likes: number
 }
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Galeri Foto Penginapan Arizky',
+  description: 'Koleksi foto villa, kamar, fasilitas, dan pemandangan alam Penginapan Arizky di Sawarna.',
+}
+
 export default function Galeri() {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null)
@@ -31,7 +38,7 @@ export default function Galeri() {
       id: 1,
       category: 'villa',
       title: 'Villa Premium Deluxe',
-      description: 'Villa mewah dengan kolam renang pribadi dan pemandangan gunung yang memukau',
+      description: 'Villa mewah dengan pemandangan gunung yang memukau',
       image: 'https://i.imgur.com/XQKMbFZ.jpeg',
       location: 'Area Villa Premium',
       rating: 4.9,
@@ -70,8 +77,8 @@ export default function Galeri() {
     {
       id: 5,
       category: 'fasilitas',
-      title: 'Restoran Premium',
-      description: 'Restoran dengan menu lokal dan internasional serta pemandangan alam',
+      title: 'Area Bersantai',
+      description: 'Area bersantai dengan suasana alam dan kenyamanan untuk keluarga',
       image: 'https://i.imgur.com/kJQHIep.jpeg',
       location: 'Lantai Dasar',
       rating: 4.8,
@@ -133,6 +140,7 @@ export default function Galeri() {
 
   return (
     <main className="min-h-screen bg-gray-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Hero Section */}
       <section className="relative h-96 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="absolute inset-0 bg-black/30"></div>
@@ -178,11 +186,13 @@ export default function Galeri() {
                 onClick={() => openImageModal(image)}
               >
                 {/* Image */}
-                <div className="relative h-64 overflow-hidden">
-                  <div 
-                    className="w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-300 group-hover:scale-110"
-                    style={{ backgroundImage: `url(${image.image})` }}
-                  ></div>
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img
+                    src={image.image}
+                    alt={image.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
                   
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
@@ -238,7 +248,7 @@ export default function Galeri() {
           className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
           onClick={closeImageModal}
         >
-          <div className="relative max-w-4xl max-h-[90vh] bg-white rounded-2xl overflow-hidden">
+            <div className="relative max-w-6xl max-h-[90svh] bg-white rounded-2xl overflow-hidden">
             {/* Close Button */}
             <button
               onClick={closeImageModal}
@@ -255,7 +265,7 @@ export default function Galeri() {
               <img
                 src={selectedImage.image}
                 alt={selectedImage.title}
-                className="w-full h-auto max-h-[70vh] object-cover"
+                className="w-full h-auto max-h-[85svh] object-contain bg-black"
               />
             </div>
 

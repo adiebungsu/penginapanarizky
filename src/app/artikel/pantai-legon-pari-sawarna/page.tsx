@@ -4,6 +4,26 @@ import { useState } from 'react'
 import { Calendar, Clock, User, ArrowLeft, Heart, Bookmark, Share2, MapPin, Camera, Waves, Sun, Mountain } from 'lucide-react'
 import Link from 'next/link'
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: 'Pantai Legon Pari Sawarna: Surga Tersembunyi di Selatan Banten',
+  description: 'Temukan keindahan Pantai Legon Pari Sawarna yang masih asri dengan pasir putih, ombak surfing, dan sunset yang memukau.',
+  image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=630&fit=crop',
+  author: { '@type': 'Organization', name: 'Penginapan Arizky' },
+  publisher: { '@type': 'Organization', name: 'Penginapan Arizky' },
+  datePublished: '2024-01-25',
+  dateModified: '2024-01-25',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': 'https://penginapanarizky.com/artikel/pantai-legon-pari-sawarna'
+  },
+  keywords: [
+    'penginapan arizky', 'penginapan arizky legon pari', 'penginapan pantai sawarna', 'villa sawarna',
+    'pantai legon pari', 'wisata sawarna', 'travel guide sawarna',
+  ],
+}
+
 export default function PantaiLegonPariSawarnaArticle() {
   const [isLiked, setIsLiked] = useState(false)
   const [isBookmarked, setIsBookmarked] = useState(false)
@@ -24,6 +44,7 @@ export default function PantaiLegonPariSawarnaArticle() {
 
   return (
     <main className="min-h-screen bg-gray-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Hero Section */}
       <div className="relative h-96 md:h-[500px] overflow-hidden">
         <img
@@ -204,9 +225,8 @@ export default function PantaiLegonPariSawarnaArticle() {
 
             <ul className="list-disc list-inside space-y-2 mb-8 text-gray-700">
               <li>Penginapan dan homestay dengan harga terjangkau</li>
-              <li>Warung makan dan restoran yang menyajikan seafood segar</li>
+              <li>Warung makan lokal dengan seafood segar</li>
               <li>Rental peralatan surfing dan snorkeling</li>
-              <li>Area parkir yang luas</li>
               <li>Toilet dan kamar mandi umum</li>
               <li>Warung-warung kecil untuk kebutuhan sehari-hari</li>
             </ul>

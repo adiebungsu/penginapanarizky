@@ -4,6 +4,78 @@ import { useState, useEffect } from 'react'
 import { Star, MapPin, Users, Wifi, Car, Coffee, Utensils, Waves, Mountain } from 'lucide-react'
 import Link from 'next/link'
 
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LodgingBusiness',
+  name: 'Penginapan Arizky',
+  description:
+    'Penginapan Arizky di Legon Pari Sawarna: pilihan villa sawarna dan penginapan tepi pantai untuk keluarga. Fasilitas lengkap, lokasi strategis, harga terbaik.',
+  url: 'https://penginapanarizky.com',
+  telephone: '+6283877080088',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Jl. Raya Wisata No. 123',
+    addressLocality: 'Sawarna',
+          addressRegion: 'Banten',
+          postalCode: '42393',
+    addressCountry: 'ID',
+  },
+  sameAs: [
+    'https://www.instagram.com/penginapanarizky',
+    'https://www.facebook.com/penginapanarizky',
+  ],
+}
+
+const webSiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Penginapan Arizky',
+  url: 'https://penginapanarizky.com',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: 'https://penginapanarizky.com/artikel?q={search_term_string}',
+    'query-input': 'required name=search_term_string',
+  },
+}
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Beranda',
+      item: 'https://penginapanarizky.com/',
+    },
+  ],
+}
+
+const articleItemListJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      url: 'https://penginapanarizky.com/artikel/pantai-legon-pari-sawarna',
+      name: 'Pantai Legon Pari Sawarna: Surga Tersembunyi di Selatan Banten',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      url: 'https://penginapanarizky.com/artikel/panduan-liburan-legon-pari',
+      name: 'Panduan Lengkap Liburan ke Pantai Legon Pari Sawarna',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      url: 'https://penginapanarizky.com/artikel/daya-tarik-legon-pari',
+      name: 'Daya Tarik dan Pesona Alam Pantai Legon Pari Sawarna',
+    },
+  ],
+}
+
 interface HeroSlide {
   id: number
   title: string
@@ -22,8 +94,8 @@ const heroSlides: HeroSlide[] = [
     subtitle: 'Temukan kenyamanan dan keindahan alam dalam satu tempat',
     cta: 'Pesan Sekarang',
     link: '/villa-kamar',
-    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&h=1080&fit=crop&crop=center',
-    fallbackImage: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1920&h=1080&fit=crop&crop=center' // fallback: pemandangan alam
+    image: 'https://i.imgur.com/pAI45l7.jpeg',
+    fallbackImage: 'https://i.imgur.com/pAI45l7.jpeg'
   },
   {
     id: 2,
@@ -31,8 +103,8 @@ const heroSlides: HeroSlide[] = [
     subtitle: 'Nikmati liburan mewah dengan fasilitas lengkap',
     cta: 'Lihat Villa',
     link: '/villa/villa-premium',
-    image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1920&h=1080&fit=crop&crop=center',
-    fallbackImage: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?w=1920&h=1080&fit=crop&crop=center' // fallback: villa
+    image: 'https://i.imgur.com/iyECWL0.jpeg',
+    fallbackImage: 'https://i.imgur.com/iyECWL0.jpeg'
   },
   {
     id: 3,
@@ -40,17 +112,17 @@ const heroSlides: HeroSlide[] = [
     subtitle: 'Beristirahat dengan tenang di kamar yang bersih dan nyaman',
     cta: 'Lihat Kamar',
     link: '/kamar/kamar-deluxe',
-    image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1920&h=1080&fit=crop&crop=center',
-    fallbackImage: 'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=1920&h=1080&fit=crop&crop=center' // fallback: kamar hotel
+    image: 'https://i.imgur.com/e2Xgc1N.jpeg',
+    fallbackImage: 'https://i.imgur.com/e2Xgc1N.jpeg'
   },
   {
     id: 4,
-    title: 'Restoran dengan Cita Rasa Terbaik',
-    subtitle: 'Nikmati hidangan lezat dengan pemandangan alam yang memukau',
-    cta: 'Lihat Menu',
+    title: 'Suasana Alam yang Menenangkan',
+    subtitle: 'Nikmati momen berkualitas bersama keluarga di area bersantai yang nyaman',
+    cta: 'Lihat Fasilitas',
     link: '/fasilitas',
-    image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&h=1080&fit=crop&crop=center',
-    fallbackImage: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1920&h=1080&fit=crop&crop=center' // fallback: restoran
+    image: 'https://i.imgur.com/D836vK9.jpeg',
+    fallbackImage: 'https://i.imgur.com/D836vK9.jpeg'
   },
   {
     id: 5,
@@ -58,8 +130,8 @@ const heroSlides: HeroSlide[] = [
     subtitle: 'Rasakan keramahan dan pelayanan terbaik kami',
     cta: 'Lihat Fasilitas',
     link: '/fasilitas',
-    image: 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1920&h=1080&fit=crop&crop=center',
-    fallbackImage: 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=1920&h=1080&fit=crop&crop=center' // fallback: lobby hotel
+    image: 'https://i.imgur.com/HbtDJKb.jpeg',
+    fallbackImage: 'https://i.imgur.com/HbtDJKb.jpeg'
   }
 ]
 
@@ -82,26 +154,47 @@ export default function Home() {
     {
       id: 'villa',
       name: 'Villa Premium',
-      description: 'Villa mewah dengan kolam renang pribadi dan pemandangan alam',
+      description: 'Villa mewah dengan pemandangan alam yang memukau, dilengkapi fasilitas lengkap untuk liburan keluarga yang nyaman',
       count: 12,
       price: 'Mulai Rp 2.500.000',
-      image: 'https://i.imgur.com/XQKMbFZ.jpeg'
+      originalPrice: 'Rp 3.200.000',
+      discount: '22%',
+      image: 'https://i.imgur.com/XQKMbFZ.jpeg',
+      features: ['AC di Semua Ruangan', 'TV LED 55"', 'WiFi Gratis', 'Dapur Lengkap', 'Balkon Luas', 'Garden View'],
+      rating: 4.9,
+      reviewCount: 89,
+      badge: 'Terpopuler',
+      badgeColor: 'bg-gradient-to-r from-yellow-400 to-orange-500'
     },
     {
       id: 'kamar',
-      name: 'Kamar Standard',
-      description: 'Kamar nyaman dengan fasilitas lengkap untuk keluarga',
+      name: 'Kamar Deluxe',
+      description: 'Kamar nyaman dengan fasilitas lengkap untuk keluarga, desain modern dan bersih',
       count: 24,
       price: 'Mulai Rp 500.000',
-      image: 'https://i.imgur.com/0NEMnoK.jpeg'
+      originalPrice: 'Rp 650.000',
+      discount: '23%',
+      image: 'https://i.imgur.com/0NEMnoK.jpeg',
+      features: ['AC', 'TV LED 42"', 'WiFi Gratis', 'Kamar Mandi Dalam', 'Teras', 'Mountain View'],
+      rating: 4.7,
+      reviewCount: 156,
+      badge: 'Terjangkau',
+      badgeColor: 'bg-gradient-to-r from-green-400 to-blue-500'
     },
     {
       id: 'cottage',
       name: 'Cottage Alam',
-      description: 'Cottage unik dengan nuansa alam yang menenangkan',
+      description: 'Cottage unik dengan nuansa alam yang menenangkan, cocok untuk liburan yang tenang',
       count: 8,
       price: 'Mulai Rp 800.000',
-      image: 'https://i.imgur.com/mokoWMJ.jpeg'
+      originalPrice: 'Rp 1.100.000',
+      discount: '27%',
+      image: 'https://i.imgur.com/mokoWMJ.jpeg',
+      features: ['Teras Alam', 'Dapur Mini', 'WiFi Gratis', 'AC', 'TV LED', 'Area BBQ'],
+      rating: 4.6,
+      reviewCount: 78,
+      badge: 'Eksklusif',
+      badgeColor: 'bg-gradient-to-r from-purple-400 to-pink-500'
     }
   ]
 
@@ -114,21 +207,9 @@ export default function Home() {
     },
     {
       id: 2,
-      name: 'Parkir Luas',
-      description: 'Area parkir aman dan luas untuk kendaraan',
-      icon: Car
-    },
-    {
-      id: 3,
-      name: 'Restoran',
-      description: 'Restoran dengan menu lokal dan internasional',
-      icon: Utensils
-    },
-    {
-      id: 4,
-      name: 'Kolam Renang',
-      description: 'Kolam renang dengan pemandangan alam',
-      icon: Waves
+      name: 'Area Bersantai',
+      description: 'Spot nyaman untuk berkumpul dan menikmati suasana alam',
+      icon: Coffee
     },
     {
       id: 5,
@@ -234,6 +315,12 @@ export default function Home() {
 
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([organizationJsonLd, webSiteJsonLd, breadcrumbJsonLd, articleItemListJsonLd]),
+        }}
+      />
       {/* Hero Section with Slider */}
       <section className="relative h-screen w-full overflow-hidden">
         <div className="absolute inset-0 bg-black/20 z-10"></div>
@@ -395,24 +482,82 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {roomCategories.map((category) => (
-              <div key={category.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div key={category.id} className="group bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                {/* Badge */}
                 <div className="relative">
-                  <div 
-                    className="h-64 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url(${category.image})` }}
-                  ></div>
-                  <div className="absolute top-4 right-4 bg-blue-600 text-white text-sm px-3 py-1 rounded-full">
+                  <div className={`absolute top-4 left-4 ${category.badgeColor} text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow-lg`}>
+                    {category.badge}
+                  </div>
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">
                     {category.count} tersedia
                   </div>
+                  
+                  {/* Image Container */}
+                  <div className="relative overflow-hidden">
+                    <div 
+                      className="h-72 bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-110"
+                      style={{ backgroundImage: `url(${category.image})` }}
+                    ></div>
+                    
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+                    
+                    {/* Rating */}
+                    <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-lg px-3 py-2">
+                      <div className="flex items-center space-x-2">
+                        <div className="flex text-yellow-400">
+                          {[...Array(5)].map((_, i) => (
+                            <Star key={i} className={`w-4 h-4 ${i < Math.floor(category.rating) ? 'fill-current' : ''}`} />
+                          ))}
+                        </div>
+                        <div className="text-sm">
+                          <span className="font-bold text-gray-900">{category.rating}</span>
+                          <span className="text-gray-600">/5</span>
+                          <p className="text-xs text-gray-500">{category.reviewCount} ulasan</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                
+                {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{category.name}</h3>
-                  <p className="text-gray-600 mb-4">{category.description}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-blue-600">{category.price}</span>
-                                         <Link href={`/${category.id === 'villa' ? 'villa/villa-premium' : category.id === 'kamar' ? 'kamar/kamar-deluxe' : 'cottage/cottage-alam'}`} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-300">
-                       Lihat Detail
-                     </Link>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                    {category.name}
+                  </h3>
+                  <p className="text-gray-600 mb-4 leading-relaxed">{category.description}</p>
+                  
+                  {/* Features */}
+                  <div className="mb-6">
+                    <div className="grid grid-cols-2 gap-2">
+                      {category.features.slice(0, 4).map((feature, index) => (
+                        <div key={index} className="flex items-center space-x-2 text-sm text-gray-600">
+                          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                          <span className="truncate">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  {/* Price and Action */}
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-3">
+                      <span className="text-3xl font-bold text-blue-600">{category.price}</span>
+                      <span className="text-lg text-gray-400 line-through">{category.originalPrice}</span>
+                      <span className="bg-red-100 text-red-600 text-sm font-bold px-2 py-1 rounded-full">
+                        {category.discount} OFF
+                      </span>
+                    </div>
+                    
+                    <Link 
+                      href={`/${category.id === 'villa' ? 'villa/villa-premium' : category.id === 'kamar' ? 'kamar/kamar-deluxe' : 'cottage/cottage-alam'}`} 
+                      className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+                    >
+                      <span>Lihat Detail</span>
+                      <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </Link>
                   </div>
                 </div>
               </div>

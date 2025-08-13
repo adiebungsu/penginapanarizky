@@ -71,7 +71,7 @@ const roomData: { [key: string]: RoomDetail } = {
 
 export default function RoomDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const [currentImage, setCurrentImage] = useState(0)
-  const [activeTab, setActiveTab] = useState('gallery')
+  const [activeSection, setActiveSection] = useState('gallery')
   const [isScrolled, setIsScrolled] = useState(false)
 
   const resolvedParams = use(params)
@@ -85,6 +85,29 @@ export default function RoomDetailPage({ params }: { params: Promise<{ id: strin
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Scroll spy untuk quick navigation
+  useEffect(() => {
+    const ids = ['gallery', 'information', 'amenities', 'reviews']
+    const observers: IntersectionObserver[] = []
+    ids.forEach((id) => {
+      const el = document.getElementById(id)
+      if (!el) return
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(id)
+        },
+        { rootMargin: '-40% 0px -50% 0px', threshold: 0.1 }
+      )
+      observer.observe(el)
+      observers.push(observer)
+    })
+    return () => observers.forEach((o) => o.disconnect())
+  }, [])
+
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   if (!room) {
     return (
@@ -142,20 +165,22 @@ export default function RoomDetailPage({ params }: { params: Promise<{ id: strin
       }`}>
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex overflow-x-auto space-x-8 py-4">
-            {['gallery', 'information', 'amenities', 'reviews'].map((tab) => (
+            {[
+              { id: 'gallery', label: 'Galeri' },
+              { id: 'information', label: 'Informasi' },
+              { id: 'amenities', label: 'Fasilitas' },
+              { id: 'reviews', label: 'Ulasan' },
+            ].map((item) => (
               <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
                 className={`whitespace-nowrap px-4 py-2 rounded-lg font-medium transition-colors duration-300 ${
-                  activeTab === tab
+                  activeSection === item.id
                     ? 'bg-blue-600 text-white'
                     : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
                 }`}
               >
-                {tab === 'gallery' && 'Galeri'}
-                {tab === 'information' && 'Informasi'}
-                {tab === 'amenities' && 'Fasilitas'}
-                {tab === 'reviews' && 'Ulasan'}
+                {item.label}
               </button>
             ))}
           </div>
@@ -166,9 +191,8 @@ export default function RoomDetailPage({ params }: { params: Promise<{ id: strin
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Gallery Tab */}
-            {activeTab === 'gallery' && (
-              <div className="bg-white rounded-2xl shadow-lg p-6">
+            {/* Galeri */}
+            <div id="gallery" className="bg-white rounded-2xl shadow-lg p-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Galeri Kamar</h2>
                 <div className="space-y-4">
                   <div className="relative h-96 rounded-xl overflow-hidden">
@@ -197,11 +221,9 @@ export default function RoomDetailPage({ params }: { params: Promise<{ id: strin
                   </div>
                 </div>
               </div>
-            )}
 
-            {/* Information Tab */}
-            {activeTab === 'information' && (
-              <div className="bg-white rounded-2xl shadow-lg p-6">
+            {/* Informasi */}
+            <div id="information" className="bg-white rounded-2xl shadow-lg p-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Informasi Kamar</h2>
                 <div className="space-y-6">
                   <div>
@@ -220,11 +242,9 @@ export default function RoomDetailPage({ params }: { params: Promise<{ id: strin
                   </div>
                 </div>
               </div>
-            )}
 
-            {/* Amenities Tab */}
-            {activeTab === 'amenities' && (
-              <div className="bg-white rounded-2xl shadow-lg p-6">
+            {/* Fasilitas */}
+            <div id="amenities" className="bg-white rounded-2xl shadow-lg p-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Fasilitas Kamar</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {room.amenities.map((amenity, index) => (
@@ -235,11 +255,9 @@ export default function RoomDetailPage({ params }: { params: Promise<{ id: strin
                   ))}
                 </div>
               </div>
-            )}
 
-            {/* Reviews Tab */}
-            {activeTab === 'reviews' && (
-              <div className="bg-white rounded-2xl shadow-lg p-6">
+            {/* Ulasan */}
+            <div id="reviews" className="bg-white rounded-2xl shadow-lg p-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Ulasan Tamu</h2>
                 <div className="flex items-center space-x-4 mb-6">
                   <div className="flex text-yellow-400">
@@ -255,7 +273,6 @@ export default function RoomDetailPage({ params }: { params: Promise<{ id: strin
                 </div>
                 <p className="text-gray-600">Belum ada ulasan untuk kamar ini. Jadilah yang pertama memberikan ulasan!</p>
               </div>
-            )}
           </div>
 
           {/* Sidebar - Booking Form */}
